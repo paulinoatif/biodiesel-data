@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodiesel Production Experiment Results</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Biodiesel Production Experiment Results</h1>
+
+    <h2>Key Properties Comparison</h2>
+    <table>
+        <tr>
+            <th>Property</th>
+            <th>Measured Value</th>
+            <th>ASTM D6751 Standard</th>
+        </tr>
+        <tr>
+            <td>Kinematic Viscosity at 40°C (mm²/s)</td>
+            <td>4.2</td>
+            <td>1.9 - 6.0</td>
+        </tr>
+        <tr>
+            <td>Cetane Number</td>
+            <td>52</td>
+            <td>Min 47</td>
+        </tr>
+        <tr>
+            <td>Flash Point (°C)</td>
+            <td>150</td>
+            <td>Min 93</td>
+        </tr>
+    </table>
+
+    <h2>Biodiesel Yield</h2>
+    <div class="chart-container">
+        <canvas id="yieldChart"></canvas>
+    </div>
+
+    <h2>Property Comparison</h2>
+    <div class="chart-container">
+        <canvas id="propertyChart"></canvas>
+    </div>
+
+    <script>
+        // Yield Chart
+        var ctx = document.getElementById('yieldChart').getContext('2d');
+        var yieldChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Biodiesel Yield', 'Other Products/Loss'],
+                datasets: [{
+                    data: [92, 8],
+                    backgroundColor: ['#36a2eb', '#ff6384']
+                }]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Biodiesel Production Yield (%)'
+                }
+            }
+        });
+
+        // Property Comparison Chart
+        var ctx2 = document.getElementById('propertyChart').getContext('2d');
+        var propertyChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Kinematic Viscosity (mm²/s)', 'Cetane Number', 'Flash Point (°C)'],
+                datasets: [{
+                    label: 'Measured Value',
+                    data: [4.2, 52, 150],
+                    backgroundColor: '#36a2eb'
+                }, {
+                    label: 'ASTM D6751 Minimum',
+                    data: [1.9, 47, 93],
+                    backgroundColor: '#ff6384'
+                }]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Biodiesel Properties Comparison'
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
